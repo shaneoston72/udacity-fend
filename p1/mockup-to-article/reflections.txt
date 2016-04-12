@@ -1,0 +1,28 @@
+You've learned a lot about web development so far. I want you to take a moment to write down your thoughts about web development here. Answer the following questions:
+  * What new skills have you learned?
+  * What has been easy?
+  * What has been difficult?
+  * How have you used the problem solving strategies from the first project to overcome challenges so far?
+
+---
+
+Web development is a wondrous, engaging domain, one which I am quite excited to be a
+part. Since I embarked on my formal training in this exciting field, I have learned
+the following:
+
+* The principle languages used to create the modern web (HTML 5, CSS 5, and
+JavaScript).
+* Object-oriented programming concepts.
+* OOP in Ruby.
+* Web application development in Sinatra.
+* Web application development in Rails.
+
+I come to my training with a working knowledge of HTML and CSS. These aspects of
+web development come easiest to me. The difficulty I have experienced thus far is
+the way to integrate front-end and back-end technologies to develop compelling
+products. My training at Udacity is meant to fill the gaps in my present
+knowledge.
+
+I have relied on my escalation process as outlined in the first project to
+research new technologies, unfamiliar tags, and bugs. For instance, I used
+Google to find how to superscript text in HTML. 
