@@ -5,7 +5,7 @@
   padding: 0;
 }
 body {
-  font-family: Tahoma, Geneva, sans-serif;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 div {
   border: 1px solid #d3d3d3;
@@ -14,21 +14,19 @@ div {
   box-shadow: 5px 5px 5px 0px rgba(211,211,211,1);
   margin: 20px;
   padding: 10px;
-  width: 400px;
+  width: 323px;
 }
 h3#cardTitle {
-  font-size: 30px;
+  font-size: 28px;
   margin: 15px 0 15px;
 }
-/* IMPORTANT: Spec called for width of 300px on the image. This width is too
-narrow tomatch the mockup provided. Measuring tools show the card width to be
-400px. Image width has been adjusted accordingly. */
-#image {
-  width: 377px;
+#animalImage
+  width: 300px;
 }
 #animalInfo {
-  margin-top: 10px;
+  margin-top: 5px;
   padding: 10px;
+  font-size: 13px;
 }
 .animalFact {
   font-style: italic;
@@ -43,7 +41,4 @@ li {
 span.listLabel {
   font-weight: bold;
   font-style: normal;
-}
-.animalInfo {
-  padding-bottom: 15px;
 }
