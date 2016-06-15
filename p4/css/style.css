@@ -14,7 +14,7 @@ body, div, ul, li, p, h1, h2, h3, h4, h5, h6 {
 
 h1 {
     font-size: 40px;
-    color: #f5a623;
+    color: #000;
     line-height: 48px;
     display: inline;
 }
@@ -22,7 +22,7 @@ h1 {
 h2 {
     font-weight: bold;
     font-size: 24px;
-    color: #999;
+    color: #505050;
     line-height: 29px;
     padding: 10px;
 }
@@ -68,7 +68,7 @@ p {
 }
 
 a {
-    color: #1199c3;
+    color: #505050;
     text-decoration: none;
     margin-top: 10px;
     display: block;
@@ -77,12 +77,13 @@ a {
 .welcome-message {
     font-style: italic;
     font-size: 18px;
-    color: #f3f3f3;
     line-height: 28px;
+    font-weight: 700;
 }
 
 #skills-h3 {
-    color: #f5ae23;
+    color: #505050;
+    font-weight: 100;
     display: none;
 }
 
@@ -90,27 +91,27 @@ a {
     background-color: #f5ae23;
 }
 
-.orange-text {
-    color: #f5ae23;
+.gray-text {
+    color: gray;
 }
 
-.white-text {
+.dark-text {
     font-weight: bold;
-    color: #fff;
+    color: #505050;
 }
 
 .gray {
-    background-color: #f3f3f3;
+    background-color: #d3d3d3;
     padding-bottom: 10px;
     clear: both;
 }
 
-.dark-gray {
-    background-color: #4a4a4a;
+.white {
+    background-color: white;
 }
 
 #header {
-    background-color: #484848;
+    background-color: white;
 }
 
 .flex-box {
