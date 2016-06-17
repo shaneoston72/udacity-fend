@@ -22,9 +22,19 @@ var bio = {
     $("#header").prepend(name, role);
     $("#header").append(displayTopContact(), image, welcome);
     $("#header").append(displaySkills());
+    $("#footerContacts").append(displayContact());
 
     function displayTopContact() {
-      $("#topContacts").append(bio.displayContact());
+      $("#topContacts").append(displayContact());
+    }
+
+    function displayContact() {
+      var mobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+      var email = HTMLemail.replace("%data%", bio.contacts.email);
+      var github = HTMLgithub.replace("%data%", bio.contacts.github);
+      var location = HTMLlocation.replace("%data%", bio.contacts.location);
+      var contact = mobile + email + github + location;
+      return contact;
     }
 
     function displaySkills() {
@@ -36,14 +46,6 @@ var bio = {
         }
       }
     }
-  },
-  "displayContact": function displayContact() {
-    var mobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-    var email = HTMLemail.replace("%data%", bio.contacts.email);
-    var github = HTMLgithub.replace("%data%", bio.contacts.github);
-    var location = HTMLlocation.replace("%data%", bio.contacts.location);
-    var contact = mobile + email + github + location;
-    return contact;
   }
 };
 
@@ -205,5 +207,4 @@ bio.display();
 projects.display();
 education.display();
 $("#mapDiv").append(googleMap);
-$("#footerContacts").append(bio.displayContact());
 work.display();
