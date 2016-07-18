@@ -2,7 +2,7 @@
 
 ## About
 This repository contains project work for Udacity's Front End Web Developer
-Nanodegree from April-June 2016.
+Nanodegree from April-July 2016.
 
 ## Projects
 
@@ -13,3 +13,5 @@ p2 - Animal Trading Cards
 p3 - Portfolio demo
 
 p4 - Online Resume
+
+p5 - Arcade Game
