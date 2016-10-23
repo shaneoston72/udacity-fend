@@ -1,0 +1,5 @@
+.DS_Store
+dist/ngrok
+src/ngrok
+ngrok
+node_modules/

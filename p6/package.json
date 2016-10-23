@@ -1,0 +1,29 @@
+{
+  "name": "p6",
+  "version": "1.0.0",
+  "description": "### Installation instructions * Install node by downloading and running node from (nodejs.org)[https://nodejs.org]. * Run ```npm install npm -g``` at the command line to get the latest version. Note that you may need to run ```sudo npm install npm-g``` depending on your system. * Clone this project from (GitHub)[]. * Change the cloned directory. * Run ```npm install``` to get project dependencies. * Change into the ```dist``` directory. * Run a web server (e.g. ```python -m SimpleHTTPServer```) * At another command line prompt, type ```./ngrok http [port number provided web server]```.",
+  "main": "dist/index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "critical": "^0.8.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-inline-css": "^3.1.0",
+    "gulp-uglify": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaneoston72/udacity-fend"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaneoston72/udacity-fend/issue"
+  },
+  "homepage": "https://github.com/udacity/frontend-nanodegree-mobile-portfolio#readme"
+}
