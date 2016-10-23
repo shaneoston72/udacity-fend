@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## Website Performance Optimisation portfolio project
 
 ### To view the production code:

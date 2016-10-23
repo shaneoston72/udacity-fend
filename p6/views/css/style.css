@@ -28,17 +28,14 @@ form {
 #pizzaSize {
   font-weight: 800;
 }
-/* added backface-visibility hidden */
+
 .mover {
-  backface-visibility: hidden;
   position: fixed;
   width: 256px;
   z-index: -1;
 }
-/* SOS change added transform and will-change */
+
 .randomPizzaContainer {
-  transform: translateZ(0);
-  will-change: transform;
   float: left;
   display: flex;
 }
