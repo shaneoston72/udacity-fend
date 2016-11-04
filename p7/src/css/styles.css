@@ -1,0 +1,33 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex-basis: 100%;
+  border: 1px solid red;
+}
+
+@media screen and (min-width: 800px) {
+  .column {
+    flex: 1;
+  }
+  .locations {
+      flex: 3.0;
+  }
+  .map {
+      flex: 7.0;
+  }
+}
