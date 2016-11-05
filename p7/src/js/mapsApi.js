@@ -2,27 +2,39 @@
 
 var map;
 var markers = [];
+var infowindow = null;
 
 function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 51.513678, lng: -0.098383 },
-    zoom: 10
-  });
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 51.513678, lng: -0.098383 },
+        zoom: 10
+    });
 
-  var bounds = new google.maps.LatLngBounds();
+    var bounds = new google.maps.LatLngBounds();
 
-  for (var i = 0; i < churches.length; i++) {
-      var position = churches[i].position;
+    var infowindow = new google.maps.InfoWindow({
+        content: 'test'
+    });
 
-      var marker = new google.maps.Marker({
-          map: map,
-          position: position,
-      });
+    for (var i = 0; i < churches.length; i++) {
+        var position = churches[i].position;
 
-      bounds.extend(position);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: position,
+            title: churches[i].name,
+            wikiSummary: 'test'
+        });
 
-      markers.push(marker);
-  }
+        markers.push(marker);
+
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(this.wikiSummary);
+            infowindow.open(map, this);
+        })
+
+    bounds.extend(position);
+    }
 
   map.fitBounds(bounds);
 }
