@@ -9,16 +9,18 @@
     <title>FEND Project 7: Neighborhood Map</title>
 
     <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiqLA_m342gX2ccRyEvelJvyMZDV5kTJw&callback=initMap"></script>
+    <script src="js/mapsApi.js"></script>
 </head>
 <body>
-    <h1>Neighborhood Map</h1>
     <section class="container">
+        <h1>Neighborhood Map</h1>
         <div class="row">
-            <aside class="column locations">
+            <aside class="column" id="locations">
                 column 1
             </aside>
-            <article class="column map">
-                column 2
+            <article class="column" id="map-container">
+                <div id="map"></div>
             </article>
         </div>
     </section>

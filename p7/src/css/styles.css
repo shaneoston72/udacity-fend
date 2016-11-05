@@ -20,14 +20,25 @@ body {
   border: 1px solid red;
 }
 
+#locations {
+    background-color: blue;
+}
+
+#map-container {
+    height: 800px;
+}
+#map {
+    height: 100%;
+}
+
 @media screen and (min-width: 800px) {
   .column {
     flex: 1;
   }
-  .locations {
+  #locations {
       flex: 3.0;
   }
-  .map {
+  #map-container {
       flex: 7.0;
   }
 }
