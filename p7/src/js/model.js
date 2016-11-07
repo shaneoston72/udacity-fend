@@ -39,6 +39,14 @@ var Model = function () {
         {
             name: 'St Laurence\'s Church',
             position: { lat: 51.347026, lng: -2.253815 }
+        },
+        {
+            name: 'Canterbury Cathedral',
+            position: { lat: 51.279791, lng: 1.082779 }
+        },
+        {
+            name: 'Winchester Cathedral',
+            position: { lat: 51.060689, lng: -1.313144}
         }
     ];
 
@@ -50,8 +58,6 @@ var Model = function () {
 var ChurchData = function (church) {
     'use strict';
 
-    var self = this;
-
-    self.name = church.name;
-    self.position = church.position;
+    this.name = ko.observable(church.name);
+    this.position = ko.observable(church.position);
 };
