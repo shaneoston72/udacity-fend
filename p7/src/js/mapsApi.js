@@ -16,8 +16,8 @@ function initMap() {
         content: 'test'
     });
 
-    for (var i = 0; i < churches.length; i++) {
-        var position = churches[i].position;
+    for (var i = 0; i < ViewModel.churches.length; i++) {
+        var position = ViewModel.churches[i].position;
 
         var marker = new google.maps.Marker({
             map: map,
