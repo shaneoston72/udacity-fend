@@ -5,10 +5,6 @@ var pubs = [
         position: { lat: 51.518462, lng: -0.107338 },
     },
     {
-        name: 'The Old Bell Tavern',
-        position: { lat: 51.514095, lng: -0.105133 }
-    },
-    {
         name: 'Lamb & Flag',
         position: { lat: 51.511722, lng: -0.125669 }
     },
@@ -86,35 +82,58 @@ var ViewModel = function () {
         pub.marker = marker;
 
         vm.markers.push(marker);
+        console.log(vm.markers);
     });
 
-    vm.markers.map(function(info) {
+    vm.markers.map(function(pub) {
         infoWindow = new google.maps.InfoWindow({
-            content: content
+            content: getWikiData(pub)
         });
 
-        info.addListener('click', function() {
+        pub.addListener('click', function() {
             infoWindow.open(map, this),
-            info.setAnimation(google.maps.Animation.BOUNCE)
+            pub.setAnimation(google.maps.Animation.BOUNCE)
             setTimeout(function() {
-                info.setAnimation(null)
+                pub.setAnimation(null)
             }, 2000);
         });
     });
 
     // Animates selected pub
     vm.pubClick = function(pub) {
-    if (pub.name) {
-        map.setZoom(15);
-        map.panTo(pub.position);
-        pub.marker.setAnimation(google.maps.Animation.BOUNCE);
-        infoWindow.open(map, pub.marker);
-    }
+        if (pub.name) {
+            map.setZoom(17);
+            map.panTo(pub.position);
+            pub.marker.setAnimation(google.maps.Animation.BOUNCE);
+            infoWindow.open(map, pub.marker);
+        }
 
-    setTimeout(function() {
-        pub.marker.setAnimation(null);
-        }, 2000);
-  };
+        setTimeout(function() {
+            pub.marker.setAnimation(null);
+            }, 2000);
+    };
+
+    function getWikiData (pub) {
+        var wikiUrl = 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=' + pub.title;
+        pub.wikiStatus = 'pending';
+        // pub.wikiInfo('Wikipedia information pending...');
+
+        var wikiRequest = $.ajax({
+            url: wikiUrl,
+            dataType: "jsonp",
+            //timeout: 3000,
+            success: function (response) {
+                console.log(response);
+                // self.wikiStatus = 'up';
+                // loc.wikiInfo(response[2]);
+            }
+        });
+
+        // wikiRequest.error(function () {
+        //     self.wikiStatus = 'error';
+        //
+        // });
+    };
 };
 
 $(document).ready(function() {
