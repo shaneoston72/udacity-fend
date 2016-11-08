@@ -8,29 +8,26 @@
     <link rel="stylesheet" href="css/styles.css">
     <title>FEND Project 7: Neighborhood Map</title>
 
-    <!-- <script type='text/javascript' src="js/knockout.js"></script> -->
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiqLA_m342gX2ccRyEvelJvyMZDV5kTJw&callback=loadMap"></script>
-    <!-- <script src="js/mapsApi.js"></script>
-    <script src="js/app.js"></script> -->
+    <script type="text/javascript" src="js/lib/knockout.js"></script>
+    <!-- TODO async loading of google maps throws jquery error -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiqLA_m342gX2ccRyEvelJvyMZDV5kTJw"></script>
+    <script src="js/lib/jquery.js"></script>
+    <script src="js/app.js"></script>
 </head>
 <body>
     <section class="container">
-        <h1>Oldest Churches in the UK</h1>
-        <h3>A selection of the oldest churches in the UK</h3>
+        <h1>Oldest Pubs in Central London</h1>
         <div class="row">
             <aside class="column" id="locations">
-                <ul data-bind="foreach: churches">
-                    <li data-bind="text: $data.name"></li>
-                </ul>
+                <h3>Select a pub to learn more about the pub.</h3>
+                <div data-bind="foreach: pubs">
+                    <p data-bind="text: name, click: pubClick"></p>
+                </div>
             </aside>
             <article class="column" id="map-container">
                 <div id="map"></div>
             </article>
         </div>
     </section>
-    <script type='text/javascript' src="js/knockout.js"></script>
-    <script src="js/model.js"></script>
-    <script src="js/mapsApi.js"></script>
-    <script src="js/app.js"></script>
 </body>
 </html>
