@@ -77,7 +77,7 @@ var ViewModel = function () {
             map: map,
             position: pub.position(),
             title: pub.name(),
-            animation: google.maps.Animation.DROP
+            animation: google.maps.Animation.DROP,
         });
 
         pub.marker = marker;
@@ -92,8 +92,11 @@ var ViewModel = function () {
         });
 
         google.maps.event.addListener(marker, 'click', function() {
+            pub.marker.setAnimation(google.maps.Animation.BOUNCE);
             infoWindow.setContent(pub.wikiContent());
             infoWindow.open(map, this);
+
+            bounceTimeout(pub);
         });
     });
 
@@ -107,9 +110,7 @@ var ViewModel = function () {
             infoWindow.open(map, pub.marker);
         }
 
-        setTimeout(function() {
-            pub.marker.setAnimation(null);
-            }, 2000);
+        bounceTimeout(pub);
     };
 
     // Filter list of pubs based on user input
@@ -143,6 +144,13 @@ var ViewModel = function () {
     vm.resetMap = function () {
         // TODO need a function to reset the map after search or zoom
     }
+
+    // stops the bounce when marker is selected
+    function bounceTimeout(pub) {
+        setTimeout(function() {
+            pub.marker.setAnimation(null);
+        }, 2000);
+    };
 
     function infoContent(pub) {
         var name = pub.name();
