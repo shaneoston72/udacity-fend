@@ -2,7 +2,7 @@
 var pubs = [
     {
         name: 'Ye Olde Mitre',
-        position: { lat: 51.518462, lng: -0.107338 },
+        position: { lat: 51.518462, lng: -0.107338 }
     },
     {
         name: 'Lamb and Flag Covent Garden',
@@ -49,13 +49,13 @@ var map,
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: mapCenter,
-        zoom: defaultZoom,
+        zoom: defaultZoom
     });
 
     ko.applyBindings(ViewModel());
 }
 
-var mapsInitError = function() {
+var mapsInitError = function () {
     alert("Google Maps failed to load");
 };
 
@@ -77,7 +77,7 @@ var ViewModel = function () {
             map: map,
             position: pub.position(),
             title: pub.name(),
-            animation: google.maps.Animation.DROP,
+            animation: google.maps.Animation.DROP
         });
 
         pub.marker = marker;
@@ -91,7 +91,7 @@ var ViewModel = function () {
             maxWidth: '250'
         });
 
-        google.maps.event.addListener(marker, 'click', function() {
+        google.maps.event.addListener(marker, 'click', function () {
             pub.marker.setAnimation(google.maps.Animation.BOUNCE);
             infoWindow.setContent(pub.wikiContent());
             infoWindow.open(map, this);
@@ -101,12 +101,12 @@ var ViewModel = function () {
     });
 
     // Animates selected pub
-    vm.pubClick = function(pub) {
+    vm.pubClick = function (pub) {
         if (pub.name) {
             map.setZoom(17);
             map.panTo(pub.position());
             pub.marker.setAnimation(google.maps.Animation.BOUNCE);
-            infoWindow.setContent(pub.wikiContent())
+            infoWindow.setContent(pub.wikiContent());
             infoWindow.open(map, pub.marker);
         }
 
@@ -117,20 +117,19 @@ var ViewModel = function () {
     vm.filterPubs = ko.computed(function () {
         var filter = vm.filter().toLowerCase().replace(/\s+/g, '');
 
-        if(!filter) {
+        if (!filter) {
             vm.pubsArray().forEach(function (pub) {
                 pub.marker.setMap(map);
             })
             return vm.pubsArray();
         } else {
-            return ko.utils.arrayFilter(vm.pubsArray(), function(pub) {
+            return ko.utils.arrayFilter(vm.pubsArray(), function (pub) {
                 if (pub.name().toLowerCase().replace(/\s+/g, '').indexOf(filter) > -1) {
-    					pub.marker.setMap(map);
-    					return pub;
-    				}
-    				else {
-    					pub.marker.setMap(null);
-    				}
+    				pub.marker.setMap(map);
+    				return pub;
+    			} else {
+    				pub.marker.setMap(null);
+    			}
             });
         }
     });
@@ -149,7 +148,7 @@ var ViewModel = function () {
     function bounceTimeout(pub) {
         setTimeout(function() {
             pub.marker.setAnimation(null);
-        }, 2000);
+        }, 2100);
     };
 
     function infoContent(pub) {
@@ -163,7 +162,7 @@ var ViewModel = function () {
             success: function (response) {
                 pub.wikiContent(formatResponse(response));
             },
-            error: function (xhr, ajaxOptions, thrownError) {
+            error: function () {
                 window.alert("I can't show you any details for " + name + " because Wikipedia did not respond.");
             }
         });
