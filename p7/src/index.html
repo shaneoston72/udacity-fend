@@ -20,7 +20,10 @@
         <div class="row">
             <aside class="column" id="locations">
                 <h3>Select a pub to learn more about the pub.</h3>
-                <div data-bind="foreach: pubsArray">
+                <p id="filter-label" class="">Filter for a particular pub</p>
+                <input id="filter-textbox" class="" data-bind="value: filter, valueUpdate: 'afterkeydown'" />
+                <button id="reset-filter-button" class="" data-bind="click: resetFilter">Reset filter</button>
+                 <div data-bind="foreach: filterPubs()">
                     <p data-bind="text: name, click: pubClick"></p>
                 </div>
             </aside>

@@ -13,24 +13,20 @@ var pubs = [
         position: { lat: 51.514351, lng: -0.107210 }
     },
     {
-        name: 'The Mayflower',
-        position: { lat: 51.501799, lng: -0.053608 }
-    },
-    {
         name: 'The George Inn, Southwark',
         position: { lat: 51.504216, lng: -0.089784 }
     },
     {
-        name: 'Angel',
-        position: { lat: 51.500572, lng: -0.059104 }
-    },
-    {
-        name: 'The Prospect of Whitby',
+        name: 'Prospect of Whitby',
         position: { lat: 51.507070, lng: -0.051122 }
     },
     {
-        name: 'The Grapes',
-        position: { lat: 51.508858, lng: -0.033945}
+        name: 'The Grapes, Limehouse',
+        position: { lat: 51.508858, lng: -0.033945 }
+    },
+    {
+        name: 'Jamaica Wine House',
+        position: { lat: 51.512945, lng: -0.085626 }
     }
 ];
 
@@ -67,14 +63,14 @@ var ViewModel = function () {
     vm.markers = [];
 
     vm.pubsArray = ko.observableArray();
+    vm.filter = ko.observable('');
 
     pubs.forEach(function (pub) {
         vm.pubsArray.push(new Pub(pub));
     })
 
-    // adds marker data to each pub
+    // adds marker data and listener to each pub
     vm.pubsArray().forEach(function (pub) {
-        console.log(pub);
         marker = new google.maps.Marker({
             map: map,
             position: pub.position(),
@@ -86,10 +82,15 @@ var ViewModel = function () {
 
         vm.markers.push(marker);
 
-        infoWindow = new google.maps.InfoWindow({ });
+        infoContent(pub);
+
+        infoWindow = new google.maps.InfoWindow({
+            content: '',
+            maxWidth: '250'
+        });
 
         google.maps.event.addListener(marker, 'click', function() {
-            infoWindow.setContent(getInfoContent(pub));
+            infoWindow.setContent(pub.wikiContent());
             infoWindow.open(map, this);
         });
     });
@@ -99,8 +100,8 @@ var ViewModel = function () {
         if (pub.name) {
             map.setZoom(17);
             map.panTo(pub.position());
-            debugger;
             pub.marker.setAnimation(google.maps.Animation.BOUNCE);
+            infoWindow.setContent(pub.wikiContent())
             infoWindow.open(map, pub.marker);
         }
 
@@ -109,23 +110,47 @@ var ViewModel = function () {
             }, 2000);
     };
 
-    function getInfoContent(pub) {
+    // Filter list of pubs based on user input
+    vm.filterPubs = ko.computed(function () {
+        var filter = vm.filter().toLowerCase();
+
+        if(!filter) {
+            return vm.pubsArray();
+        } else {
+            return ko.utils.arrayFilter(vm.pubsArray(), function(pub) {
+                return ko.utils.stringStartsWith(pub.name().toLowerCase(), filter);
+            });
+        };
+    });
+
+    vm.resetFilter = function() {
+        vm.filter('');
+    }
+
+    function infoContent(pub) {
+
         var name = pub.name();
-        var wikiUrl = 'https://en.wikipedia.org/w/api.php?format=json&action=opensearch&search=' + name + '&format=json&callback=wikiCb';
+
+        var wikiUrl = 'https://en.wikipedia.org/w/api.php?format=json&action=opensearch&search=' + name + '&format=json';
+        var string;
 
         $.ajax({
             url: wikiUrl,
             dataType: 'jsonp',
-            jsonp: 'callback',
             success: function (response) {
-                pub.wikiContent = formatInfoContent(response);
-                return pub.wikiContent;
+                console.log(response);
+                pub.wikiContent(formatResponse(response));
             }
+            // TODO add error handling
         });
-    };
+    }
 
-    function formatInfoContent(wikiData) {
-        return 'test';
+    function formatResponse(data) {
+        var contentString =
+            '<div><strong>' + data[0] + '</div></strong>' +
+            '<p>' + data[2][0] + '</p>' +
+            '<a href="' + data[3][0] + '" target="_blank">Link to Wikipedia article</a>';
+        return contentString;
     }
 };
 
