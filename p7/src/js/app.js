@@ -41,21 +41,23 @@ var Pub = function (pub) {
 // global variables
 var map,
     infoWindow,
-    marker;
+    marker,
+    defaultZoom = 13,
+    mapCenter = { lat: 51.513859, lng: -0.098351 };
 
 // Create an instance of a Google Map
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 51.513678, lng: -0.098383 },
-        zoom: 13,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: true,
-        mapTypeControlOptions: {
-            style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-        }
+        center: mapCenter,
+        zoom: defaultZoom,
     });
 
+    ko.applyBindings(ViewModel());
 }
+
+var mapsInitError = function() {
+    alert("Google Maps failed to load");
+};
 
 var ViewModel = function () {
     var vm = this;
@@ -80,9 +82,9 @@ var ViewModel = function () {
 
         pub.marker = marker;
 
-        vm.markers.push(marker);
-
         infoContent(pub);
+
+        vm.markers.push(marker);
 
         infoWindow = new google.maps.InfoWindow({
             content: '',
@@ -112,25 +114,38 @@ var ViewModel = function () {
 
     // Filter list of pubs based on user input
     vm.filterPubs = ko.computed(function () {
-        var filter = vm.filter().toLowerCase();
+        var filter = vm.filter().toLowerCase().replace(/\s+/g, '');
 
         if(!filter) {
+            vm.pubsArray().forEach(function (pub) {
+                pub.marker.setMap(map);
+            })
             return vm.pubsArray();
         } else {
             return ko.utils.arrayFilter(vm.pubsArray(), function(pub) {
-                return ko.utils.stringStartsWith(pub.name().toLowerCase(), filter);
+                if (pub.name().toLowerCase().replace(/\s+/g, '').indexOf(filter) > -1) {
+    					pub.marker.setMap(map);
+    					return pub;
+    				}
+    				else {
+    					pub.marker.setMap(null);
+    				}
             });
-        };
+        }
     });
 
+    // resets filter
     vm.resetFilter = function() {
         vm.filter('');
+    };
+
+    // resets map to default
+    vm.resetMap = function () {
+        // TODO need a function to reset the map after search or zoom
     }
 
     function infoContent(pub) {
-
         var name = pub.name();
-
         var wikiUrl = 'https://en.wikipedia.org/w/api.php?format=json&action=opensearch&search=' + name + '&format=json';
         var string;
 
@@ -138,10 +153,11 @@ var ViewModel = function () {
             url: wikiUrl,
             dataType: 'jsonp',
             success: function (response) {
-                console.log(response);
                 pub.wikiContent(formatResponse(response));
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                window.alert("I can't show you any details for " + name + " because Wikipedia did not respond.");
             }
-            // TODO add error handling
         });
     }
 
@@ -156,5 +172,5 @@ var ViewModel = function () {
 
 $(document).ready(function() {
     initMap();
-    ko.applyBindings(ViewModel());
+    //ko.applyBindings(ViewModel());
 });
