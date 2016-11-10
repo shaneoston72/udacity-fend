@@ -19,3 +19,5 @@ Nanodegree from April-July 2016.
 [p6 - Optimisation](https://github.com/shaneoston72/udacity-fend/tree/master/p6)
 
 [p7 - Neighbourhood Map](https://github.com/shaneoston72/udacity-fend/tree/master/p7)
+
+[p8- Feed Reader Testing](https://github.com/shaneoston72/udacity-fend/tree/master/p8)
