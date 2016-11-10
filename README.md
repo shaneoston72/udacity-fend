@@ -2,7 +2,7 @@
 
 ## About
 This repository contains project work for Udacity's Front End Web Developer
-Nanodegree from April-July 2016.
+Nanodegree from April-November 2016.
 
 ## Projects
 
