@@ -57,12 +57,13 @@ $(function() {
 
     describe('Initial Entries', function () {
         beforeEach(function (done) {
-            loadFeed(0);
-            done();
+            loadFeed(0, done);
         });
 
-        it('has a single entry after loadFeed runs', function () {
-            expect($('.entry')).not.toBe(null);
+        it('has a single entry after loadFeed runs', function (done) {
+            var entry = $('.feed .entry')[0];
+            expect(entry).toBeGreaterThan('');
+            done();
         });
     });
 
@@ -75,8 +76,8 @@ $(function() {
         });
 
         it('content changes when a new feed is loaded', function (done) {
-            feed0 = $('feed').html();
-            loadFeed(1);
+            feed0 = $('.feed .entry')[0];
+            loadFeed(1, done);
 
             expect($('.feed').html()).not.toEqual(feed0);
             done();
