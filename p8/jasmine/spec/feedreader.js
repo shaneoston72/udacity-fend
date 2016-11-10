@@ -72,15 +72,17 @@ $(function() {
             feed1;
 
         beforeEach(function (done) {
-            loadFeed(0, done);
+            loadFeed(0, function () {
+                feed0 = $('.feed .entry').html();
+                loadFeed(1, function() {
+                    feed1 = $('.feed .entry').html();
+                    done();
+                });
+            });
         });
 
-        it('content changes when a new feed is loaded', function (done) {
-            feed0 = $('.feed .entry')[0];
-            loadFeed(1, done);
-
-            expect($('.feed').html()).not.toEqual(feed0);
-            done();
+        it('content changes when a new feed is loaded', function () {
+            expect(feed1).not.toEqual(feed0);
         });
     });
 
